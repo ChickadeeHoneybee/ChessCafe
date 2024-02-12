@@ -1,7 +1,110 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
-<H1>Test</H1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <base href="./" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="chessboardjs/css/chessboard-1.0.0.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Chickadee's Nest and Chess Cafe</title>
 
-<p>Testing paragraph</p>
+</head>
+
+<body>
+
+    <header>
+        <h1>Chickadee's Nest and Chess Cafe</h1>
+    </header>
+
+    <nav>
+        <a href="#menu">Menu</a> | <a href="#rules">Rules</a> | <a href="#app">Interactive Chess Board</a>
+    </nav>
+
+    <section id="menu">
+        <h2>Cafe Menu</h2>
+        <p>Enjoy our high-quality selection:</p>
+        <ul>
+            <li></li>
+            <li>Homemade Pastries: Freshly baked daily - $2.49</li>
+            <li>Avocado Toast: With a sprinkle of love - $5.99</li>
+            <li>Seasonal Fruit Salad: Bursting with flavors - $4.49</li>
+            <!-- Add more items as needed -->
+        </ul>
+    </section>
+
+    <section id="rules">
+        <h2>Chess Rules</h2>
+        <p>To play chess at Chickadee's, we recommend two modes:</p>
+        <ul>
+            <li><b>In-Game Chat</b>: using /tell or by forming a party with your opponent, take turns writing your moves
+                in
+                standard algebraic notation to each other.
+                Meanwhile, play IRL on a real board or use a digital board <i>with no engine</i>.
+                Our digital board below should give you all you need to do this.
+                We recommend playing friendly games with no time limits in this mode.
+            </li>
+            <li><b>Online Chess</b>: share your username on <a href="https://chess.com">chess.com</a>,
+                <a href="https://lichess.org">lichess.org</a>, or equivalent and challenge each other to play on there.
+                This option enables easier short time controls, and can include ranked games if both players want.
+            </li>
+        </ul>
+    </section>
+
+    <section id="app">
+        <h2>Interactive Chess Board</h2>
+        <!-- Based on https://chessboardjs.com/examples#5000 -->
+        <div id="app-container">
+
+            <div class="row-container">
+                <textarea id="userInput" class="textarea-input" placeholder="Enter FEN/PGN string"></textarea>
+                <button class="submit-button" onclick="submitFENPGN()">Submit FEN/PGN</button>
+            </div>
+
+            <div class="centered">
+                <div id="board" style="width: 500px"></div>
+            </div>
+            <div id="status" class="centered"></div>
+
+
+            <label>FEN:</label>
+            <div>
+                <div class="data">
+                    <div id="fen" class="data-content"></div>
+                    <button class="copy-button" onclick="copyText('fen')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+
+            <label>PGN:</label>
+            <div>
+                <div class="data">
+                    <div id="pgn" class="data-content"></div>
+                    <button class="copy-button" onclick="copyText('pgn')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <script src="chessboardjs/js/chessboard-1.0.0.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.12.1/chess.min.js"
+                integrity="sha512-rIescAjPgXHz3WaxrSjaOl5iZfvBVIehYe+EF+d+DAdFNgV10QBT8d5APBjcGFKES0iVUYjBilvpck7gOe7CLg=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="./interactive_board.js">
+            </script>
+
+            <div>
+                <button onclick="navigate('back')">&#9664;</button>
+                <button onclick="navigate('forward')">&#9654;</button>
+            </div>
+        </div>
+    </section>
+
+</body>
 
 </html>
