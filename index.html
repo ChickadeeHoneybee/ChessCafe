@@ -58,16 +58,15 @@
         <h2>Interactive Chess Board</h2>
         <!-- Based on https://chessboardjs.com/examples#5000 -->
         <div id="app-container">
-
-            <div class="row-container">
-                <textarea id="userInput" class="textarea-input" placeholder="Enter FEN/PGN string"></textarea>
-                <button class="submit-button" onclick="submitFENPGN()">Submit FEN/PGN</button>
-            </div>
-
             <div class="centered">
                 <div id="board" style="width: 500px"></div>
             </div>
-            <div id="status" class="centered"></div>
+            <div class="centered">
+                <div  style="width: 500px; text-align: center; position: relative; height: 35px">
+                    <b id="status"></b>
+                    <button class="undo-button" onclick="undoMove()" alt-text="undo move"><i class="fas fa-undo"></i></button>
+                </div>
+            </div>
 
 
             <label>FEN:</label>
@@ -90,21 +89,22 @@
                 </div>
             </div>
 
+            <div class="row-container">
+                <textarea id="userInput" class="textarea-input" placeholder="Enter FEN/PGN string"></textarea>
+                <button class="submit-button" onclick="submitFENPGN()">Submit FEN/PGN</button>
+            </div>
+
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
             <script src="chessboardjs/js/chessboard-1.0.0.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.12.1/chess.min.js"
-                integrity="sha512-rIescAjPgXHz3WaxrSjaOl5iZfvBVIehYe+EF+d+DAdFNgV10QBT8d5APBjcGFKES0iVUYjBilvpck7gOe7CLg=="
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" integrity="sha512-xRllwz2gdZciIB+AkEbeq+gVhX8VB8XsfqeFbUh+SzHlN96dEduwtTuVuc2u9EROlmW9+yhRlxjif66ORpsgVA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
             <script src="./interactive_board.js">
             </script>
 
-            <div>
-                <button onclick="navigate('back')">&#9664;</button>
-                <button onclick="navigate('forward')">&#9654;</button>
-            </div>
         </div>
     </section>
 
+    <div id="snackbar"></div>
 </body>
 
 </html>

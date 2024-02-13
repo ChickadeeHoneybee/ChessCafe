@@ -130,3 +130,41 @@ button {
 .submit-button:hover {
     background-color: #2980b9;
 }
+
+.undo-button {
+    position: absolute;
+    bottom: 0px; /* Adjust the distance from the bottom as needed */
+    right: 10px; /* Adjust the distance from the right as needed */
+    padding: 10px;
+    
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.undo-button:hover {
+    background-color: #2980b9;
+}
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    margin-left: -125px;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+#snackbar.show {
+    visibility: visible;
+    opacity: 1;
+}

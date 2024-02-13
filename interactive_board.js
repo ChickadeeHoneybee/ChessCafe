@@ -41,8 +41,11 @@ function getPromotion() {
     var userInput;
     var validChoices = ["q", "Q", "R", "r", "B", "b", "N", "n"];
 
+    originalPrompt = "Promote to: (Q)ueen, (R)ook, (B)ishop, or k(N)ight";
+    promptText = originalPrompt;
+
     do {
-        userInput = window.prompt("Promote to: (Q)ueen, (R)ook, (B)ishop, or k(N)ight");
+        userInput = window.prompt(promptText);
 
         if (userInput === null) {
             return; // Exit the function if the user cancels
@@ -51,7 +54,7 @@ function getPromotion() {
         userInput = userInput.trim(); // Remove leading and trailing whitespaces
 
         if (!validChoices.includes(userInput)) {
-            alert("Invalid choice.");
+            promptText = "Invalid choice. " + originalPrompt;
         }
 
     } while (!validChoices.includes(userInput));
@@ -98,6 +101,12 @@ function updateStatus() {
     $pgn.html(game.pgn())
 }
 
+function undoMove() {
+    game.undo()
+    board.position(game.fen())
+    updateStatus()
+}
+
 function copyText(elementId) {
     /* Get the text content based on the provided element ID */
     var textToCopy = document.getElementById(elementId).innerText;
@@ -108,44 +117,33 @@ function copyText(elementId) {
     /* Use the Clipboard API to write to the clipboard */
     navigator.clipboard.write([clipboardItem]).then(function () {
         /* Optionally, provide some feedback to the user */
-        alert("Text has been copied to the clipboard: " + textToCopy);
+        showSnackbar("Text has been copied to the clipboard: " + textToCopy);
     }).catch(function (err) {
         /* Handle errors */
         console.error("Unable to copy text to clipboard", err);
     });
 }
 
-// Sample navigation function (replace with your specific logic)
-function navigate(direction) {
-    var userInput = document.getElementById('userInput').value;
-
-    // Add your logic here based on user input and direction (back/forward)
-    // For now, let's just log the input to the console
-    console.log('User Input:', userInput);
-}
 
 // Sample submit function (replace with your specific logic)
 function submitFENPGN() {
     var userInput = document.getElementById('userInput').value;
-    try {
-        game.load(userInput)
-        board.position(game.fen())
-        updateStatus()
-        console.log("loaded " + userInput)
-    } catch (e) {
-        console.log(e)
-    }
-
-    // try {
-    //     game.loadPgn(userInput)
-    //     board.position(game.fen())
-    //     updateStatus()
-    //     console.log("loaded " + userInput)
-    // } catch (e) {
-    //     console.log(e)
-    // }
-
     
+    result = game.load_pgn(userInput)
+    if (!result) {
+        game.load(userInput)
+    }
+    board.position(game.fen())
+    updateStatus()
+}
+
+function showSnackbar(message) {
+    var snackbar = document.getElementById("snackbar");
+    snackbar.textContent = message;
+    snackbar.className = "show";
+    setTimeout(function () {
+        snackbar.className = snackbar.className.replace("show", "");
+    }, 3000); // Adjust the time (in milliseconds) the snackbar is displayed
 }
 
 var config = {
